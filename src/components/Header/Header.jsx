@@ -24,8 +24,8 @@ const navigationItems = [
         icon: BriefcaseBusiness,
     },
     {
-        label: 'Services',
-        href: '/#services',
+        label: 'Processus',
+        href: '/#process',
         icon: PanelsTopLeft,
     },
     {
@@ -138,11 +138,10 @@ export default function Header() {
 
             <div
                 id="mobile-menu"
-                className={`mobile-menu ${
-                    isMenuOpen
+                className={`mobile-menu ${isMenuOpen
                         ? 'mobile-menu--open'
                         : ''
-                }`}
+                    }`}
                 aria-hidden={!isMenuOpen}
             >
                 <div className="mobile-menu__top">
