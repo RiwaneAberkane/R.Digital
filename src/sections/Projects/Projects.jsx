@@ -1,0 +1,563 @@
+import { useLayoutEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import {
+    ArrowUpRight,
+    Check,
+    ExternalLink,
+} from 'lucide-react';
+
+import { gsap } from '../../utils/gsap';
+
+import xenomImage from '../../assets/images/projects/xenom.png';
+import halalFoodImage from '../../assets/images/projects/halal-food-caen.png';
+import cristouneImage from '../../assets/images/projects/cristoune-creation.png';
+
+import './Projects.css';
+
+const projects = [
+    {
+        number: '01',
+        slug: 'xenom',
+        name: 'XENOM',
+        category: 'Site vitrine immersif',
+
+        description:
+            'Une expérience automobile expérimentale pensée autour du design, du mouvement et de l’immersion. Un projet conçu pour pousser plus loin l’intégration frontend et les animations.',
+
+        image: xenomImage,
+
+        imageAlt:
+            'Page d’accueil du projet automobile immersif XENOM',
+
+        theme: 'xenom',
+
+        liveUrl: 'https://xenombeyondmotion.netlify.app/',
+
+        tags: [
+            'React',
+            'GSAP',
+            'ScrollTrigger',
+        ],
+
+        highlights: [
+            'Direction visuelle immersive',
+            'Animations sur mesure',
+            'Responsive travaillé',
+        ],
+    },
+
+    {
+        number: '02',
+        slug: 'halal-food-caen',
+        name: 'Halal Food Caen',
+        category: 'Guide local & expérience web',
+
+        description:
+            'Une interface pensée pour découvrir facilement des restaurants halal à Caen grâce à une navigation claire, des filtres, une recherche et une carte interactive.',
+
+        image: halalFoodImage,
+
+        imageAlt:
+            'Interface du site Halal Food Caen avec restaurants et carte',
+
+        theme: 'halal',
+
+        liveUrl: 'https://halalfoodcaen.fr/',
+
+        tags: [
+            'Recherche',
+            'Filtres',
+            'Carte',
+        ],
+
+        highlights: [
+            'Recherche de restaurants',
+            'Filtres par spécialité',
+            'Expérience locale claire',
+        ],
+    },
+
+    {
+        number: '03',
+        slug: 'cristoune-creation',
+        name: 'CrisToune Création',
+        category: 'E-commerce artisanal',
+
+        description:
+            'Une boutique en ligne élégante imaginée autour d’un univers artisanal, chaleureux et premium, avec une expérience adaptée à la découverte et à la vente des créations.',
+
+        image: cristouneImage,
+
+        imageAlt:
+            'Boutique en ligne CrisToune Création présentant des bijoux artisanaux',
+
+        theme: 'cristoune',
+
+        liveUrl: 'https://cristounecreation.netlify.app/',
+
+        tags: [
+            'React',
+            'Firebase',
+            'E-commerce',
+        ],
+
+        highlights: [
+            'Catalogue dynamique',
+            'Univers de marque sur mesure',
+            'Architecture Firebase',
+        ],
+    },
+];
+
+export default function Projects() {
+    const sectionRef = useRef(null);
+
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            const mm = gsap.matchMedia();
+
+            mm.add(
+                {
+                    desktop: '(min-width: 901px)',
+                    mobile: '(max-width: 900px)',
+                    reduceMotion:
+                        '(prefers-reduced-motion: reduce)',
+                },
+
+                (context) => {
+                    const {
+                        desktop,
+                        reduceMotion,
+                    } = context.conditions;
+
+                    if (reduceMotion) {
+                        gsap.set(
+                            [
+                                '.projects__header',
+                                '.project-showcase__visual',
+                                '.project-showcase__content',
+                            ],
+                            {
+                                clearProps: 'all',
+                                opacity: 1,
+                                transform: 'none',
+                            },
+                        );
+
+                        return;
+                    }
+
+                    gsap.from('.projects__header', {
+                        y: 50,
+                        opacity: 0,
+
+                        duration: 0.9,
+
+                        ease: 'power3.out',
+
+                        scrollTrigger: {
+                            trigger:
+                                '.projects__header',
+
+                            start:
+                                'top 82%',
+                        },
+                    });
+
+                    const projectItems =
+                        gsap.utils.toArray(
+                            '.project-showcase',
+                        );
+
+                    projectItems.forEach(
+                        (project, index) => {
+                            const visual =
+                                project.querySelector(
+                                    '.project-showcase__visual',
+                                );
+
+                            const content =
+                                project.querySelector(
+                                    '.project-showcase__content',
+                                );
+
+                            const image =
+                                project.querySelector(
+                                    '.project-browser__image',
+                                );
+
+                            if (desktop) {
+                                const visualDirection =
+                                    index % 2 === 0
+                                        ? -70
+                                        : 70;
+
+                                gsap.from(visual, {
+                                    x: visualDirection,
+                                    y: 40,
+
+                                    rotateY:
+                                        index % 2 === 0
+                                            ? 6
+                                            : -6,
+
+                                    scale: 0.94,
+
+                                    opacity: 0,
+
+                                    duration: 1.1,
+
+                                    ease: 'power3.out',
+
+                                    scrollTrigger: {
+                                        trigger: project,
+
+                                        start:
+                                            'top 76%',
+                                    },
+                                });
+
+                                gsap.from(content, {
+                                    x:
+                                        index % 2 === 0
+                                            ? 45
+                                            : -45,
+
+                                    y: 30,
+
+                                    opacity: 0,
+
+                                    duration: 0.9,
+
+                                    delay: 0.1,
+
+                                    ease: 'power3.out',
+
+                                    scrollTrigger: {
+                                        trigger: project,
+
+                                        start:
+                                            'top 73%',
+                                    },
+                                });
+
+                                gsap.to(image, {
+                                    yPercent: -4,
+
+                                    scrollTrigger: {
+                                        trigger: project,
+
+                                        start:
+                                            'top bottom',
+
+                                        end:
+                                            'bottom top',
+
+                                        scrub: 1.5,
+                                    },
+                                });
+                            } else {
+                                gsap.from(visual, {
+                                    y: 45,
+
+                                    scale: 0.96,
+
+                                    opacity: 0,
+
+                                    duration: 0.85,
+
+                                    ease: 'power3.out',
+
+                                    scrollTrigger: {
+                                        trigger: project,
+
+                                        start:
+                                            'top 85%',
+                                    },
+                                });
+
+                                gsap.from(content, {
+                                    y: 35,
+
+                                    opacity: 0,
+
+                                    duration: 0.75,
+
+                                    ease: 'power3.out',
+
+                                    scrollTrigger: {
+                                        trigger: content,
+
+                                        start:
+                                            'top 88%',
+                                    },
+                                });
+                            }
+                        },
+                    );
+                },
+            );
+
+            return () => mm.revert();
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
+
+    return (
+        <section
+            ref={sectionRef}
+            id="projects"
+            className="projects"
+        >
+            <div className="container">
+                <header className="projects__header">
+                    <div className="projects__heading">
+                        <span className="section-label">
+                            Mes réalisations
+                        </span>
+
+                        <h2>
+                            Des projets différents.
+                            <br />
+
+                            <span>
+                                Une même exigence.
+                            </span>
+                        </h2>
+                    </div>
+
+                    <p className="projects__intro">
+                        Chaque projet répond à un besoin,
+                        un univers et une expérience
+                        différente. L’objectif reste le même :
+                        créer quelque chose de clair,
+                        performant et mémorable.
+                    </p>
+                </header>
+
+                <div className="projects__list">
+                    {projects.map(
+                        (project, index) => (
+                            <article
+                                key={project.slug}
+                                className={[
+                                    'project-showcase',
+
+                                    `project-showcase--${project.theme}`,
+
+                                    index % 2 !== 0
+                                        ? 'project-showcase--reverse'
+                                        : '',
+                                ]
+                                    .filter(Boolean)
+                                    .join(' ')}
+                            >
+                                <div className="project-showcase__visual">
+                                    <div className="project-showcase__background-number">
+                                        {project.number}
+                                    </div>
+
+                                    <div className="project-showcase__glow" />
+
+                                    <div className="project-browser">
+                                        <div className="project-browser__top">
+                                            <div className="project-browser__controls">
+                                                <span />
+                                                <span />
+                                                <span />
+                                            </div>
+
+                                            <div className="project-browser__address">
+                                                {
+                                                    project.slug
+                                                }
+                                            </div>
+
+                                            <span className="project-browser__index">
+                                                {
+                                                    project.number
+                                                }{' '}
+                                                / 03
+                                            </span>
+                                        </div>
+
+                                        <div className="project-browser__viewport">
+                                            <img
+                                                className="project-browser__image"
+                                                src={
+                                                    project.image
+                                                }
+                                                alt={
+                                                    project.imageAlt
+                                                }
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="project-showcase__content">
+                                    <div className="project-showcase__number">
+                                        <span>
+                                            {
+                                                project.number
+                                            }
+                                        </span>
+
+                                        <span className="project-showcase__line" />
+
+                                        <span>
+                                            03
+                                        </span>
+                                    </div>
+
+                                    <span className="project-showcase__category">
+                                        {
+                                            project.category
+                                        }
+                                    </span>
+
+                                    <h3>
+                                        {project.name}
+                                    </h3>
+
+                                    <p className="project-showcase__description">
+                                        {
+                                            project.description
+                                        }
+                                    </p>
+
+                                    <div className="project-showcase__tags">
+                                        {project.tags.map(
+                                            (tag) => (
+                                                <span
+                                                    key={
+                                                        tag
+                                                    }
+                                                >
+                                                    {
+                                                        tag
+                                                    }
+                                                </span>
+                                            ),
+                                        )}
+                                    </div>
+
+                                    <div className="project-showcase__highlights">
+                                        {project.highlights.map(
+                                            (
+                                                highlight,
+                                            ) => (
+                                                <div
+                                                    key={
+                                                        highlight
+                                                    }
+                                                    className="project-showcase__highlight"
+                                                >
+                                                    <span className="project-showcase__check">
+                                                        <Check
+                                                            size={
+                                                                13
+                                                            }
+                                                            strokeWidth={
+                                                                2.5
+                                                            }
+                                                        />
+                                                    </span>
+
+                                                    <span>
+                                                        {
+                                                            highlight
+                                                        }
+                                                    </span>
+                                                </div>
+                                            ),
+                                        )}
+                                    </div>
+
+                                    <div className="project-showcase__actions">
+                                        <Link
+                                            to={`/projets/${project.slug}`}
+                                            className="project-showcase__link"
+                                        >
+                                            <span>
+                                                Découvrir
+                                                le projet
+                                            </span>
+
+                                            <span className="project-showcase__link-icon">
+                                                <ArrowUpRight
+                                                    size={
+                                                        18
+                                                    }
+                                                    strokeWidth={
+                                                        2
+                                                    }
+                                                />
+                                            </span>
+                                        </Link>
+
+                                        <a
+                                            href={
+                                                project.liveUrl ||
+                                                '#'
+                                            }
+                                            target={
+                                                project.liveUrl
+                                                    ? '_blank'
+                                                    : undefined
+                                            }
+                                            rel={
+                                                project.liveUrl
+                                                    ? 'noopener noreferrer'
+                                                    : undefined
+                                            }
+                                            aria-disabled={
+                                                !project.liveUrl
+                                            }
+                                            className={[
+                                                'project-showcase__live-link',
+
+                                                !project.liveUrl
+                                                    ? 'project-showcase__live-link--disabled'
+                                                    : '',
+                                            ]
+                                                .filter(Boolean)
+                                                .join(
+                                                    ' ',
+                                                )}
+                                            onClick={(
+                                                event,
+                                            ) => {
+                                                if (
+                                                    !project.liveUrl
+                                                ) {
+                                                    event.preventDefault();
+                                                }
+                                            }}
+                                        >
+                                            <span>
+                                                Voir le site
+                                            </span>
+
+                                            <ExternalLink
+                                                size={
+                                                    15
+                                                }
+                                                strokeWidth={
+                                                    2
+                                                }
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        ),
+                    )}
+                </div>
+            </div>
+        </section>
+    );
+}

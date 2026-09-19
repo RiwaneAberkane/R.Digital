@@ -1,5 +1,7 @@
 import Header from '../components/Header/Header';
+
 import Hero from '../sections/Hero/Hero';
+import Projects from '../sections/Projects/Projects';
 
 export default function Home() {
     return (
@@ -9,13 +11,7 @@ export default function Home() {
             <main>
                 <Hero />
 
-                <section
-                    id="projects"
-                    style={{
-                        minHeight: '100vh',
-                        background: '#ffffff',
-                    }}
-                />
+                <Projects />
 
                 <section
                     id="about"
