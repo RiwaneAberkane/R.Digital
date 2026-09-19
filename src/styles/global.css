@@ -1,14 +1,29 @@
 html {
     background: var(--color-background);
+    scroll-behavior: smooth;
 }
 
 body {
+    min-width: 320px;
+
     font-family: var(--font-primary);
-    background: var(--color-background);
+
+    background:
+        radial-gradient(circle at 15% 0%,
+            rgba(18, 104, 255, 0.06),
+            transparent 25%),
+        var(--color-background);
+
     color: var(--color-text);
+
     line-height: 1.5;
+
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+body.menu-open {
+    overflow: hidden;
 }
 
 #root {
@@ -22,13 +37,47 @@ body {
     margin-inline: auto;
 }
 
+.page {
+    min-height: 100vh;
+}
+
+.section {
+    position: relative;
+    padding-block: 120px;
+}
+
+.section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    color: var(--color-blue);
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.section-label::before {
+    content: "";
+
+    width: 20px;
+    height: 2px;
+
+    background: var(--color-blue);
+}
+
 ::selection {
     background: var(--color-blue);
     color: var(--color-white);
 }
 
 @media (max-width: 768px) {
-    :root {
-        --container-padding: 20px;
+    .section {
+        padding-block: 80px;
     }
 }

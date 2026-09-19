@@ -1,29 +1,73 @@
 :root {
+    /* Colors */
     --color-white: #ffffff;
+
     --color-background: #f7faff;
     --color-background-soft: #eef5ff;
+    --color-background-blue: #e8f1ff;
 
     --color-navy: #06152f;
     --color-navy-light: #10254a;
+    --color-navy-soft: #1a3158;
 
     --color-blue: #1268ff;
     --color-blue-electric: #0077ff;
+    --color-blue-bright: #2492ff;
     --color-blue-light: #dcebff;
 
     --color-text: #07142d;
     --color-text-soft: #647089;
+    --color-text-light: #8995aa;
 
     --color-border: rgba(7, 20, 45, 0.1);
+    --color-border-blue: rgba(18, 104, 255, 0.18);
 
-    --font-primary: 'Inter', Arial, sans-serif;
+    /* Typography */
+    --font-primary:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
+    /* Layout */
     --container-width: 1440px;
     --container-padding: 32px;
 
-    --border-radius-small: 8px;
-    --border-radius-medium: 16px;
-    --border-radius-large: 28px;
+    --header-height: 88px;
 
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.35s ease;
+    /* Radius */
+    --radius-small: 10px;
+    --radius-medium: 16px;
+    --radius-large: 24px;
+    --radius-pill: 999px;
+
+    /* Shadows */
+    --shadow-small:
+        0 8px 30px rgba(6, 21, 47, 0.08);
+
+    --shadow-medium:
+        0 20px 60px rgba(6, 21, 47, 0.12);
+
+    --shadow-blue:
+        0 12px 35px rgba(18, 104, 255, 0.28);
+
+    /* Transitions */
+    --transition-fast: 180ms ease;
+    --transition-normal: 300ms ease;
+    --transition-slow: 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --container-padding: 24px;
+        --header-height: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --container-padding: 20px;
+        --header-height: 72px;
+    }
 }
