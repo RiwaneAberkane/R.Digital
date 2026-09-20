@@ -67,14 +67,75 @@ export default function Header() {
         setIsOpen(false);
     };
 
+    const scrollToSection = (
+        event,
+        sectionId,
+    ) => {
+        /*
+         * Si on n'est pas sur la Home,
+         * on laisse le href faire son travail.
+         */
+        if (window.location.pathname !== '/') {
+            closeMenu();
+            return;
+        }
+
+        event.preventDefault();
+
+        closeMenu();
+
+        const section =
+            document.getElementById(sectionId);
+
+        if (!section) {
+            return;
+        }
+
+        /*
+         * On met d'abord le hash à jour.
+         */
+        window.history.pushState(
+            null,
+            '',
+            `/#${sectionId}`,
+        );
+
+        /*
+         * Puis on scroll nous-mêmes.
+         */
+        const header =
+            document.querySelector('.header');
+
+        const headerHeight =
+            header?.offsetHeight || 0;
+
+        const sectionTop =
+            section.getBoundingClientRect().top +
+            window.scrollY -
+            headerHeight;
+
+        window.scrollTo({
+            top: Math.max(0, sectionTop),
+            behavior: 'smooth',
+        });
+    };
+
     return (
         <header className="header">
             <div className="container header__container">
+
+                {/* LOGO */}
+
                 <a
                     href="/#hero"
                     className="header__brand"
                     aria-label="R Digital - Accueil"
-                    onClick={closeMenu}
+                    onClick={(event) =>
+                        scrollToSection(
+                            event,
+                            'hero',
+                        )
+                    }
                 >
                     <span className="header__logo">
                         R
@@ -85,6 +146,8 @@ export default function Header() {
                     </span>
                 </a>
 
+                {/* NAVIGATION DESKTOP */}
+
                 <nav
                     className="header__nav"
                     aria-label="Navigation principale"
@@ -93,16 +156,31 @@ export default function Header() {
                         ({
                             label,
                             href,
-                        }) => (
-                            <a
-                                key={label}
-                                href={href}
-                            >
-                                {label}
-                            </a>
-                        ),
+                        }) => {
+                            const sectionId =
+                                href.split('#')[1];
+
+                            return (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    onClick={(
+                                        event,
+                                    ) =>
+                                        scrollToSection(
+                                            event,
+                                            sectionId,
+                                        )
+                                    }
+                                >
+                                    {label}
+                                </a>
+                            );
+                        },
                     )}
                 </nav>
+
+                {/* CTA DESKTOP */}
 
                 <a
                     href="mailto:r.digitalcorporation@gmail.com"
@@ -115,6 +193,8 @@ export default function Header() {
                         strokeWidth={2}
                     />
                 </a>
+
+                {/* MENU MOBILE */}
 
                 <button
                     type="button"
@@ -147,10 +227,13 @@ export default function Header() {
                 </button>
             </div>
 
+            {/* MENU MOBILE */}
+
             <div
                 id="mobile-menu"
                 className={[
                     'header__mobile',
+
                     isOpen
                         ? 'header__mobile--open'
                         : '',
@@ -159,6 +242,7 @@ export default function Header() {
                     .join(' ')}
             >
                 <div className="container header__mobile-inner">
+
                     <div>
                         <span className="header__mobile-label">
                             Navigation
@@ -175,43 +259,61 @@ export default function Header() {
                                         href,
                                     },
                                     index,
-                                ) => (
-                                    <a
-                                        key={label}
-                                        href={href}
-                                        onClick={
-                                            closeMenu
-                                        }
-                                    >
-                                        <span>
-                                            {String(
-                                                index +
-                                                1,
-                                            ).padStart(
-                                                2,
-                                                '0',
-                                            )}
-                                        </span>
+                                ) => {
+                                    const sectionId =
+                                        href.split(
+                                            '#',
+                                        )[1];
 
-                                        <strong>
-                                            {
+                                    return (
+                                        <a
+                                            key={
                                                 label
                                             }
-                                        </strong>
+                                            href={
+                                                href
+                                            }
+                                            onClick={(
+                                                event,
+                                            ) =>
+                                                scrollToSection(
+                                                    event,
+                                                    sectionId,
+                                                )
+                                            }
+                                        >
+                                            <span>
+                                                {String(
+                                                    index +
+                                                    1,
+                                                ).padStart(
+                                                    2,
+                                                    '0',
+                                                )}
+                                            </span>
 
-                                        <ArrowUpRight
-                                            size={
-                                                18
-                                            }
-                                            strokeWidth={
-                                                1.8
-                                            }
-                                        />
-                                    </a>
-                                ),
+                                            <strong>
+                                                {
+                                                    label
+                                                }
+                                            </strong>
+
+                                            <ArrowUpRight
+                                                size={
+                                                    18
+                                                }
+                                                strokeWidth={
+                                                    1.8
+                                                }
+                                            />
+                                        </a>
+                                    );
+                                },
                             )}
                         </nav>
                     </div>
+
+                    {/* BAS DU MENU */}
 
                     <div className="header__mobile-bottom">
                         <div className="header__mobile-contact-copy">

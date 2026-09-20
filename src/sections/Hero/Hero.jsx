@@ -186,7 +186,7 @@ export default function Hero() {
     return (
         <section
             ref={heroRef}
-            id="home"
+            id="hero"
             className="hero"
         >
             <div className="hero__glow hero__glow--one" />
