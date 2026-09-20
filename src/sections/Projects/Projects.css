@@ -273,25 +273,37 @@
     letter-spacing: 0.1em;
 }
 
+/* =========================
+   SCREENSHOT
+========================= */
+
 .project-browser__viewport {
     position: relative;
 
-    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    aspect-ratio: 2 / 1;
 
     overflow: hidden;
 
-    background: #eef2f8;
+    background:
+        #eef2f8;
 }
 
 .project-browser__image {
+    display: block;
+
     width: 100%;
-    height: 108%;
+    height: 100%;
 
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
 
-    object-position: top center;
-
-    transform: scale(1.01);
+    transform: scale(1);
 
     will-change: transform;
 }
@@ -463,10 +475,6 @@
     margin-top: 34px;
 }
 
-/* =========================
-   PROJECT LINK
-========================= */
-
 .project-showcase__link {
     display: inline-flex;
     align-items: center;
@@ -511,7 +519,7 @@
 }
 
 /* =========================
-   LIVE WEBSITE BUTTON
+   LIVE BUTTON
 ========================= */
 
 .project-showcase__live-link {
@@ -594,6 +602,10 @@
         0 15px 45px rgba(18, 104, 255, 0.08);
 }
 
+.project-showcase--xenom .project-browser__viewport {
+    background: #050607;
+}
+
 /* =========================
    HALAL FOOD CAEN
 ========================= */
@@ -631,6 +643,10 @@
         rgba(196, 142, 12, 0.18);
 }
 
+.project-showcase--halal .project-browser__viewport {
+    background: #fffaf1;
+}
+
 /* =========================
    CRISTOUNE
 ========================= */
@@ -666,6 +682,10 @@
 
     border-color:
         rgba(143, 97, 168, 0.16);
+}
+
+.project-showcase--cristoune .project-browser__viewport {
+    background: #fbf7f2;
 }
 
 /* =========================

@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+
 import {
     ArrowUpRight,
     Check,
@@ -7,107 +8,9 @@ import {
 } from 'lucide-react';
 
 import { gsap } from '../../utils/gsap';
-
-import xenomImage from '../../assets/images/projects/xenom.png';
-import halalFoodImage from '../../assets/images/projects/halal-food-caen.png';
-import cristouneImage from '../../assets/images/projects/cristoune-creation.png';
+import { projects } from '../../data/projects';
 
 import './Projects.css';
-
-const projects = [
-    {
-        number: '01',
-        slug: 'xenom',
-        name: 'XENOM',
-        category: 'Site vitrine immersif',
-
-        description:
-            'Une expérience automobile expérimentale pensée autour du design, du mouvement et de l’immersion. Un projet conçu pour pousser plus loin l’intégration frontend et les animations.',
-
-        image: xenomImage,
-
-        imageAlt:
-            'Page d’accueil du projet automobile immersif XENOM',
-
-        theme: 'xenom',
-
-        liveUrl: 'https://xenombeyondmotion.netlify.app/',
-
-        tags: [
-            'React',
-            'GSAP',
-            'ScrollTrigger',
-        ],
-
-        highlights: [
-            'Direction visuelle immersive',
-            'Animations sur mesure',
-            'Responsive travaillé',
-        ],
-    },
-
-    {
-        number: '02',
-        slug: 'halal-food-caen',
-        name: 'Halal Food Caen',
-        category: 'Guide local & expérience web',
-
-        description:
-            'Une interface pensée pour découvrir facilement des restaurants halal à Caen grâce à une navigation claire, des filtres, une recherche et une carte interactive.',
-
-        image: halalFoodImage,
-
-        imageAlt:
-            'Interface du site Halal Food Caen avec restaurants et carte',
-
-        theme: 'halal',
-
-        liveUrl: 'https://halalfoodcaen.fr/',
-
-        tags: [
-            'Recherche',
-            'Filtres',
-            'Carte',
-        ],
-
-        highlights: [
-            'Recherche de restaurants',
-            'Filtres par spécialité',
-            'Expérience locale claire',
-        ],
-    },
-
-    {
-        number: '03',
-        slug: 'cristoune-creation',
-        name: 'CrisToune Création',
-        category: 'E-commerce artisanal',
-
-        description:
-            'Une boutique en ligne élégante imaginée autour d’un univers artisanal, chaleureux et premium, avec une expérience adaptée à la découverte et à la vente des créations.',
-
-        image: cristouneImage,
-
-        imageAlt:
-            'Boutique en ligne CrisToune Création présentant des bijoux artisanaux',
-
-        theme: 'cristoune',
-
-        liveUrl: 'https://cristounecreation.netlify.app/',
-
-        tags: [
-            'React',
-            'Firebase',
-            'E-commerce',
-        ],
-
-        highlights: [
-            'Catalogue dynamique',
-            'Univers de marque sur mesure',
-            'Architecture Firebase',
-        ],
-    },
-];
 
 export default function Projects() {
     const sectionRef = useRef(null);
@@ -123,7 +26,6 @@ export default function Projects() {
                     reduceMotion:
                         '(prefers-reduced-motion: reduce)',
                 },
-
                 (context) => {
                     const {
                         desktop,
@@ -150,17 +52,12 @@ export default function Projects() {
                     gsap.from('.projects__header', {
                         y: 50,
                         opacity: 0,
-
                         duration: 0.9,
-
                         ease: 'power3.out',
 
                         scrollTrigger: {
-                            trigger:
-                                '.projects__header',
-
-                            start:
-                                'top 82%',
+                            trigger: '.projects__header',
+                            start: 'top 82%',
                         },
                     });
 
@@ -187,13 +84,12 @@ export default function Projects() {
                                 );
 
                             if (desktop) {
-                                const visualDirection =
-                                    index % 2 === 0
-                                        ? -70
-                                        : 70;
-
                                 gsap.from(visual, {
-                                    x: visualDirection,
+                                    x:
+                                        index % 2 === 0
+                                            ? -70
+                                            : 70,
+
                                     y: 40,
 
                                     rotateY:
@@ -202,18 +98,13 @@ export default function Projects() {
                                             : -6,
 
                                     scale: 0.94,
-
                                     opacity: 0,
-
                                     duration: 1.1,
-
                                     ease: 'power3.out',
 
                                     scrollTrigger: {
                                         trigger: project,
-
-                                        start:
-                                            'top 76%',
+                                        start: 'top 76%',
                                     },
                                 });
 
@@ -224,72 +115,55 @@ export default function Projects() {
                                             : -45,
 
                                     y: 30,
-
                                     opacity: 0,
-
                                     duration: 0.9,
-
                                     delay: 0.1,
-
                                     ease: 'power3.out',
 
                                     scrollTrigger: {
                                         trigger: project,
-
-                                        start:
-                                            'top 73%',
+                                        start: 'top 73%',
                                     },
                                 });
 
+                                /*
+                                    Mouvement volontairement très léger.
+                                    On garde la profondeur sans rogner
+                                    fortement les screenshots.
+                                */
                                 gsap.to(image, {
-                                    yPercent: -4,
+                                    yPercent: -1.5,
 
                                     scrollTrigger: {
                                         trigger: project,
-
-                                        start:
-                                            'top bottom',
-
-                                        end:
-                                            'bottom top',
-
+                                        start: 'top bottom',
+                                        end: 'bottom top',
                                         scrub: 1.5,
                                     },
                                 });
                             } else {
                                 gsap.from(visual, {
                                     y: 45,
-
                                     scale: 0.96,
-
                                     opacity: 0,
-
                                     duration: 0.85,
-
                                     ease: 'power3.out',
 
                                     scrollTrigger: {
                                         trigger: project,
-
-                                        start:
-                                            'top 85%',
+                                        start: 'top 85%',
                                     },
                                 });
 
                                 gsap.from(content, {
                                     y: 35,
-
                                     opacity: 0,
-
                                     duration: 0.75,
-
                                     ease: 'power3.out',
 
                                     scrollTrigger: {
                                         trigger: content,
-
-                                        start:
-                                            'top 88%',
+                                        start: 'top 88%',
                                     },
                                 });
                             }
@@ -343,7 +217,6 @@ export default function Projects() {
                                 key={project.slug}
                                 className={[
                                     'project-showcase',
-
                                     `project-showcase--${project.theme}`,
 
                                     index % 2 !== 0
@@ -369,28 +242,19 @@ export default function Projects() {
                                             </div>
 
                                             <div className="project-browser__address">
-                                                {
-                                                    project.slug
-                                                }
+                                                {project.slug}
                                             </div>
 
                                             <span className="project-browser__index">
-                                                {
-                                                    project.number
-                                                }{' '}
-                                                / 03
+                                                {project.number} / 03
                                             </span>
                                         </div>
 
                                         <div className="project-browser__viewport">
                                             <img
                                                 className="project-browser__image"
-                                                src={
-                                                    project.image
-                                                }
-                                                alt={
-                                                    project.imageAlt
-                                                }
+                                                src={project.mainImage}
+                                                alt={project.imageAlt}
                                                 loading="lazy"
                                                 decoding="async"
                                             />
@@ -401,9 +265,7 @@ export default function Projects() {
                                 <div className="project-showcase__content">
                                     <div className="project-showcase__number">
                                         <span>
-                                            {
-                                                project.number
-                                            }
+                                            {project.number}
                                         </span>
 
                                         <span className="project-showcase__line" />
@@ -414,9 +276,7 @@ export default function Projects() {
                                     </div>
 
                                     <span className="project-showcase__category">
-                                        {
-                                            project.category
-                                        }
+                                        {project.category}
                                     </span>
 
                                     <h3>
@@ -424,43 +284,41 @@ export default function Projects() {
                                     </h3>
 
                                     <p className="project-showcase__description">
-                                        {
-                                            project.description
-                                        }
+                                        {project.shortDescription}
                                     </p>
 
                                     <div className="project-showcase__tags">
-                                        {project.tags.map(
-                                            (tag) => (
-                                                <span
-                                                    key={
-                                                        tag
-                                                    }
-                                                >
-                                                    {
-                                                        tag
-                                                    }
-                                                </span>
-                                            ),
-                                        )}
+                                        {project.stack
+                                            .slice(0, 3)
+                                            .map(
+                                                (
+                                                    technology,
+                                                ) => (
+                                                    <span
+                                                        key={
+                                                            technology
+                                                        }
+                                                    >
+                                                        {
+                                                            technology
+                                                        }
+                                                    </span>
+                                                ),
+                                            )}
                                     </div>
 
                                     <div className="project-showcase__highlights">
-                                        {project.highlights.map(
-                                            (
-                                                highlight,
-                                            ) => (
+                                        {project.features.map(
+                                            (feature) => (
                                                 <div
                                                     key={
-                                                        highlight
+                                                        feature.title
                                                     }
                                                     className="project-showcase__highlight"
                                                 >
                                                     <span className="project-showcase__check">
                                                         <Check
-                                                            size={
-                                                                13
-                                                            }
+                                                            size={13}
                                                             strokeWidth={
                                                                 2.5
                                                             }
@@ -469,7 +327,7 @@ export default function Projects() {
 
                                                     <span>
                                                         {
-                                                            highlight
+                                                            feature.title
                                                         }
                                                     </span>
                                                 </div>
@@ -483,15 +341,12 @@ export default function Projects() {
                                             className="project-showcase__link"
                                         >
                                             <span>
-                                                Découvrir
-                                                le projet
+                                                Découvrir le projet
                                             </span>
 
                                             <span className="project-showcase__link-icon">
                                                 <ArrowUpRight
-                                                    size={
-                                                        18
-                                                    }
+                                                    size={18}
                                                     strokeWidth={
                                                         2
                                                     }
@@ -525,12 +380,8 @@ export default function Projects() {
                                                     : '',
                                             ]
                                                 .filter(Boolean)
-                                                .join(
-                                                    ' ',
-                                                )}
-                                            onClick={(
-                                                event,
-                                            ) => {
+                                                .join(' ')}
+                                            onClick={(event) => {
                                                 if (
                                                     !project.liveUrl
                                                 ) {
@@ -543,12 +394,8 @@ export default function Projects() {
                                             </span>
 
                                             <ExternalLink
-                                                size={
-                                                    15
-                                                }
-                                                strokeWidth={
-                                                    2
-                                                }
+                                                size={15}
+                                                strokeWidth={2}
                                             />
                                         </a>
                                     </div>
