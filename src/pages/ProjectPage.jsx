@@ -1,5 +1,4 @@
 import {
-    useEffect,
     useLayoutEffect,
     useRef,
 } from 'react';
@@ -36,18 +35,13 @@ export default function ProjectPage() {
 
     const pageRef = useRef(null);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [slug]);
-
     useLayoutEffect(() => {
         if (!project) {
             return undefined;
         }
 
         const ctx = gsap.context(() => {
-            const mm =
-                gsap.matchMedia();
+            const mm = gsap.matchMedia();
 
             mm.add(
                 {
@@ -57,8 +51,7 @@ export default function ProjectPage() {
                 (context) => {
                     const {
                         reduceMotion,
-                    } =
-                        context.conditions;
+                    } = context.conditions;
 
                     if (reduceMotion) {
                         gsap.set(
@@ -72,8 +65,7 @@ export default function ProjectPage() {
                             ],
                             {
                                 opacity: 1,
-                                clearProps:
-                                    'all',
+                                clearProps: 'all',
                             },
                         );
 
@@ -93,7 +85,9 @@ export default function ProjectPage() {
                             '.project-detail__eyebrow',
                             {
                                 y: 18,
-                                opacity: 0,
+                                opacity:
+                                    0,
+
                                 duration:
                                     0.6,
                             },
@@ -103,7 +97,9 @@ export default function ProjectPage() {
                             '.project-detail__title',
                             {
                                 y: 55,
-                                opacity: 0,
+                                opacity:
+                                    0,
+
                                 duration:
                                     0.9,
                             },
@@ -114,7 +110,9 @@ export default function ProjectPage() {
                             '.project-detail__lead',
                             {
                                 y: 30,
-                                opacity: 0,
+                                opacity:
+                                    0,
+
                                 duration:
                                     0.7,
                             },
@@ -125,7 +123,9 @@ export default function ProjectPage() {
                             '.project-detail__hero-actions',
                             {
                                 y: 20,
-                                opacity: 0,
+                                opacity:
+                                    0,
+
                                 duration:
                                     0.6,
                             },
@@ -136,8 +136,12 @@ export default function ProjectPage() {
                             '.project-detail__hero-visual',
                             {
                                 y: 60,
-                                scale: 0.96,
-                                opacity: 0,
+                                scale:
+                                    0.96,
+
+                                opacity:
+                                    0,
+
                                 duration:
                                     1.1,
                             },
@@ -155,6 +159,7 @@ export default function ProjectPage() {
                                 element,
                                 {
                                     y: 50,
+
                                     opacity:
                                         0,
 
@@ -179,17 +184,18 @@ export default function ProjectPage() {
                 },
             );
 
-            return () =>
-                mm.revert();
+            return () => mm.revert();
         }, pageRef);
 
-        return () =>
-            ctx.revert();
+        return () => ctx.revert();
     }, [project]);
 
     if (!project) {
         return (
-            <div className="project-not-found">
+            <main
+                id="main-content"
+                className="project-not-found"
+            >
                 <div>
                     <h1>
                         Projet introuvable.
@@ -199,16 +205,17 @@ export default function ProjectPage() {
                         Retour à l’accueil
                     </Link>
                 </div>
-            </div>
+            </main>
         );
     }
 
     return (
         <>
             <Helmet>
+                <html lang="fr" />
+
                 <title>
-                    {project.name} —
-                    R Digital
+                    {project.name} — R Digital
                 </title>
 
                 <meta
@@ -217,11 +224,34 @@ export default function ProjectPage() {
                         project.shortDescription
                     }
                 />
+
+                <meta
+                    name="robots"
+                    content="index, follow"
+                />
+
+                <meta
+                    property="og:title"
+                    content={`${project.name} — R Digital`}
+                />
+
+                <meta
+                    property="og:description"
+                    content={
+                        project.shortDescription
+                    }
+                />
+
+                <meta
+                    property="og:type"
+                    content="website"
+                />
             </Helmet>
 
             <Header />
 
             <main
+                id="main-content"
                 ref={pageRef}
                 className={[
                     'project-detail',
@@ -282,9 +312,7 @@ export default function ProjectPage() {
                                         rel="noopener noreferrer"
                                         className="project-detail__primary-button"
                                     >
-                                        Voir
-                                        le
-                                        site
+                                        Voir le site
 
                                         <ExternalLink
                                             size={
@@ -301,9 +329,7 @@ export default function ProjectPage() {
                                     href="#project-content"
                                     className="project-detail__secondary-button"
                                 >
-                                    Découvrir
-                                    le
-                                    projet
+                                    Découvrir le projet
 
                                     <ArrowRight
                                         size={
@@ -346,6 +372,9 @@ export default function ProjectPage() {
                                         alt={
                                             project.imageAlt
                                         }
+                                        loading="eager"
+                                        decoding="async"
+                                        fetchPriority="high"
                                     />
                                 </div>
                             </div>
@@ -369,11 +398,8 @@ export default function ProjectPage() {
                                 </span>
 
                                 <h2>
-                                    Une
-                                    expérience
-                                    pensée
-                                    pour son
-                                    univers.
+                                    Une expérience pensée
+                                    pour son univers.
                                 </h2>
                             </div>
 
@@ -420,8 +446,7 @@ export default function ProjectPage() {
                             </div>
 
                             <h2>
-                                Ce qui
-                                structure
+                                Ce qui structure
                                 l’expérience.
                             </h2>
                         </div>
@@ -430,10 +455,13 @@ export default function ProjectPage() {
                             {project.features.map(
                                 (
                                     feature,
+                                    index,
                                 ) => (
                                     <article
                                         key={
-                                            feature.number
+                                            feature.number ??
+                                            feature.title ??
+                                            index
                                         }
                                         className="project-detail__feature project-detail__reveal"
                                     >
@@ -475,8 +503,7 @@ export default function ProjectPage() {
                             </div>
 
                             <h2>
-                                Le projet
-                                en images.
+                                Le projet en images.
                             </h2>
                         </div>
 
@@ -554,8 +581,7 @@ export default function ProjectPage() {
                                 </span>
 
                                 <h2>
-                                    Stack
-                                    technique.
+                                    Stack technique.
                                 </h2>
                             </div>
 
@@ -584,20 +610,17 @@ export default function ProjectPage() {
                     <div className="container">
                         <div className="project-detail__cta-box project-detail__reveal">
                             <span>
-                                Un projet en
-                                tête ?
+                                Un projet en tête ?
                             </span>
 
                             <h2>
-                                Créons quelque
-                                chose qui vous
-                                ressemble.
+                                Créons quelque chose
+                                qui vous ressemble.
                             </h2>
 
                             <p>
-                                Une idée, un site
-                                ou une application
-                                ? Parlons-en
+                                Une idée, un site ou une
+                                application ? Parlons-en
                                 simplement.
                             </p>
 
@@ -605,8 +628,7 @@ export default function ProjectPage() {
                                 href="mailto:r.digitalcorporation@gmail.com"
                                 className="project-detail__cta-link"
                             >
-                                Parlons de
-                                votre projet
+                                Parlons de votre projet
 
                                 <ArrowUpRight
                                     size={19}

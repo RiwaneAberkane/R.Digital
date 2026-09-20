@@ -1,0 +1,169 @@
+/* =========================================
+   R DIGITAL — GLOBAL POLISH
+========================================= */
+
+/* =========================
+   DOCUMENT
+========================= */
+
+html {
+    scroll-behavior: smooth;
+
+    scroll-padding-top:
+        calc(var(--header-height) + 24px);
+}
+
+body {
+    min-width: 320px;
+
+    overflow-x: hidden;
+
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+    min-height: 100vh;
+
+    overflow-x: clip;
+}
+
+/* =========================
+   SECTIONS / ANCHORS
+========================= */
+
+#hero,
+#projects,
+#about,
+#process,
+#stack,
+#contact,
+#project-content {
+    scroll-margin-top:
+        calc(var(--header-height) + 24px);
+}
+
+/* =========================
+   MEDIA
+========================= */
+
+img,
+picture,
+svg {
+    max-width: 100%;
+}
+
+img {
+    height: auto;
+}
+
+/* =========================
+   TEXT SELECTION
+========================= */
+
+::selection {
+    color: #ffffff;
+
+    background:
+        var(--color-blue);
+}
+
+/* =========================
+   KEYBOARD FOCUS
+========================= */
+
+a,
+button {
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline:
+        3px solid rgba(18, 104, 255, 0.45);
+
+    outline-offset: 4px;
+
+    border-radius: 6px;
+}
+
+/* =========================
+   SKIP LINK
+========================= */
+
+.skip-link {
+    position: fixed;
+
+    top: 12px;
+    left: 12px;
+
+    z-index: 99999;
+
+    padding:
+        11px 16px;
+
+    color: #ffffff;
+
+    font-size: 0.75rem;
+    font-weight: 750;
+
+    background:
+        var(--color-blue);
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 10px 35px rgba(18, 104, 255, 0.25);
+
+    transform:
+        translateY(-160%);
+
+    transition:
+        transform 0.2s ease;
+}
+
+.skip-link:focus {
+    transform:
+        translateY(0);
+}
+
+/* =========================
+   MOBILE TAP TARGETS
+========================= */
+
+@media (max-width: 600px) {
+
+    button,
+    a {
+        touch-action: manipulation;
+    }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior:
+            auto !important;
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+    }
+}

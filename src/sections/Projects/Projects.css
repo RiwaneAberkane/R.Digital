@@ -478,13 +478,36 @@
 .project-showcase__link {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
 
     gap: 13px;
 
-    color: var(--color-navy);
+    min-height: 52px;
+
+    padding:
+        6px 7px 6px 20px;
+
+    color: var(--color-white);
 
     font-size: 0.85rem;
     font-weight: 750;
+
+    background:
+        var(--color-navy);
+
+    border:
+        1px solid var(--color-navy);
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 14px 32px rgba(6, 21, 47, 0.14);
+
+    transition:
+        background var(--transition-normal),
+        border-color var(--transition-normal),
+        transform var(--transition-normal),
+        box-shadow var(--transition-normal);
 }
 
 .project-showcase__link-icon {
@@ -494,28 +517,46 @@
     width: 40px;
     height: 40px;
 
-    color: var(--color-white);
+    color: var(--color-navy);
 
     background:
-        var(--color-navy);
+        var(--color-white);
 
     border-radius: 50%;
 
     transition:
+        color var(--transition-normal),
         background var(--transition-normal),
         transform var(--transition-normal),
         box-shadow var(--transition-normal);
 }
 
-.project-showcase__link:hover .project-showcase__link-icon {
+.project-showcase__link:hover {
     background:
         var(--color-blue);
 
+    border-color:
+        var(--color-blue);
+
     transform:
-        translate(3px, -3px);
+        translateY(-3px);
 
     box-shadow:
-        0 10px 25px rgba(18, 104, 255, 0.24);
+        0 18px 38px rgba(18, 104, 255, 0.2);
+}
+
+.project-showcase__link:hover .project-showcase__link-icon {
+    color:
+        var(--color-blue);
+
+    background:
+        var(--color-white);
+
+    transform:
+        rotate(45deg);
+
+    box-shadow:
+        0 8px 20px rgba(6, 21, 47, 0.14);
 }
 
 /* =========================
@@ -870,17 +911,40 @@
     }
 
     .project-showcase__actions {
-        align-items: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
 
-        gap: 16px;
+        gap: 12px;
 
-        margin-top: 28px;
+        margin-top: 24px;
+    }
+
+    .project-showcase__link {
+        min-height: 46px;
+
+        padding:
+            5px 6px 5px 16px;
+
+        gap: 10px;
+
+        font-size: 0.76rem;
+
+        border-radius: 11px;
+    }
+
+    .project-showcase__link-icon {
+        width: 34px;
+        height: 34px;
     }
 
     .project-showcase__live-link {
-        min-height: 38px;
+        min-height: 46px;
 
         padding:
-            0 13px;
+            0 12px;
+
+        font-size: 0.68rem;
+
+        border-radius: 11px;
     }
 }

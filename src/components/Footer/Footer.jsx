@@ -7,9 +7,17 @@ import './Footer.css';
 
 export default function Footer() {
     const scrollToTop = () => {
+        const reduceMotion =
+            window.matchMedia(
+                '(prefers-reduced-motion: reduce)',
+            ).matches;
+
         window.scrollTo({
             top: 0,
-            behavior: 'smooth',
+
+            behavior: reduceMotion
+                ? 'auto'
+                : 'smooth',
         });
     };
 
@@ -22,6 +30,7 @@ export default function Footer() {
                     <a
                         href="/#hero"
                         className="footer__brand"
+                        aria-label="R Digital - Accueil"
                     >
                         <span className="footer__logo">
                             R

@@ -28,6 +28,10 @@ const navigation = [
         label: 'Technologies',
         href: '/#stack',
     },
+    {
+        label: 'Contact',
+        href: '/#contact',
+    },
 ];
 
 export default function Header() {
@@ -121,12 +125,13 @@ export default function Header() {
                                 !current,
                         )
                     }
+                    aria-expanded={isOpen}
+                    aria-controls="mobile-menu"
                     aria-label={
                         isOpen
                             ? 'Fermer le menu'
                             : 'Ouvrir le menu'
                     }
-                    aria-expanded={isOpen}
                 >
                     {isOpen ? (
                         <X
@@ -143,6 +148,7 @@ export default function Header() {
             </div>
 
             <div
+                id="mobile-menu"
                 className={[
                     'header__mobile',
                     isOpen
@@ -153,64 +159,102 @@ export default function Header() {
                     .join(' ')}
             >
                 <div className="container header__mobile-inner">
-                    <span className="header__mobile-label">
-                        Navigation
-                    </span>
+                    <div>
+                        <span className="header__mobile-label">
+                            Navigation
+                        </span>
 
-                    <nav
-                        className="header__mobile-nav"
-                        aria-label="Navigation mobile"
-                    >
-                        {navigation.map(
-                            (
-                                {
-                                    label,
-                                    href,
-                                },
-                                index,
-                            ) => (
-                                <a
-                                    key={label}
-                                    href={href}
-                                    onClick={
-                                        closeMenu
-                                    }
-                                >
-                                    <span>
-                                        0
-                                        {index +
-                                            1}
-                                    </span>
-
-                                    {label}
-                                </a>
-                            ),
-                        )}
-
-                        <a
-                            href="/#contact"
-                            onClick={
-                                closeMenu
-                            }
+                        <nav
+                            className="header__mobile-nav"
+                            aria-label="Navigation mobile"
                         >
-                            <span>
-                                05
-                            </span>
+                            {navigation.map(
+                                (
+                                    {
+                                        label,
+                                        href,
+                                    },
+                                    index,
+                                ) => (
+                                    <a
+                                        key={label}
+                                        href={href}
+                                        onClick={
+                                            closeMenu
+                                        }
+                                    >
+                                        <span>
+                                            {String(
+                                                index +
+                                                1,
+                                            ).padStart(
+                                                2,
+                                                '0',
+                                            )}
+                                        </span>
 
-                            Contact
-                        </a>
-                    </nav>
+                                        <strong>
+                                            {
+                                                label
+                                            }
+                                        </strong>
+
+                                        <ArrowUpRight
+                                            size={
+                                                18
+                                            }
+                                            strokeWidth={
+                                                1.8
+                                            }
+                                        />
+                                    </a>
+                                ),
+                            )}
+                        </nav>
+                    </div>
 
                     <div className="header__mobile-bottom">
+                        <div className="header__mobile-contact-copy">
+                            <span>
+                                Une idée en tête ?
+                            </span>
+
+                            <strong>
+                                Parlons-en.
+                            </strong>
+
+                            <p>
+                                Un projet, une refonte
+                                ou simplement une idée
+                                à discuter ?
+                            </p>
+                        </div>
+
                         <a
                             href="mailto:r.digitalcorporation@gmail.com"
+                            className="header__mobile-contact"
                         >
-                            r.digitalcorporation@gmail.com
+                            <span>
+                                r.digitalcorporation@gmail.com
+                            </span>
+
+                            <span className="header__mobile-contact-icon">
+                                <ArrowUpRight
+                                    size={18}
+                                    strokeWidth={2}
+                                />
+                            </span>
                         </a>
 
-                        <span>
-                            R DIGITAL · 2026
-                        </span>
+                        <div className="header__mobile-footer">
+                            <span>
+                                R DIGITAL
+                            </span>
+
+                            <span>
+                                2026
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
