@@ -16,13 +16,13 @@ export default function Home() {
             <Helmet>
                 <html lang="fr" />
 
-                <title>
-                    R Digital — Développement & design digital
-                </title>
+                {/* Titre de l'onglet */}
+                <title>R.Digital — Développeur Web & Designer</title>
 
+                {/* SEO principal */}
                 <meta
                     name="description"
-                    content="R Digital conçoit des sites et expériences digitales modernes, performants et sur mesure, du design au développement."
+                    content="R.Digital conçoit des sites web modernes, performants et sur mesure, du design au développement."
                 />
 
                 <meta
@@ -30,19 +30,21 @@ export default function Home() {
                     content="index, follow"
                 />
 
+                {/* Couleur navigateur */}
                 <meta
                     name="theme-color"
                     content="#06152c"
                 />
 
+                {/* Open Graph */}
                 <meta
                     property="og:title"
-                    content="R Digital — Développement & design digital"
+                    content="R.Digital — Portfolio"
                 />
 
                 <meta
                     property="og:description"
-                    content="Sites web et expériences digitales modernes, performants et pensés sur mesure."
+                    content="Création de sites web modernes, performants et sur mesure, du design au développement."
                 />
 
                 <meta
@@ -51,8 +53,24 @@ export default function Home() {
                 />
 
                 <meta
+                    property="og:site_name"
+                    content="R.Digital"
+                />
+
+                {/* Twitter / X */}
+                <meta
                     name="twitter:card"
                     content="summary_large_image"
+                />
+
+                <meta
+                    name="twitter:title"
+                    content="R.Digital — Portfolio"
+                />
+
+                <meta
+                    name="twitter:description"
+                    content="Création de sites web modernes, performants et sur mesure."
                 />
             </Helmet>
 
@@ -60,15 +78,10 @@ export default function Home() {
 
             <main id="main-content">
                 <Hero />
-
                 <Projects />
-
                 <About />
-
                 <Process />
-
                 <Stack />
-
                 <Contact />
             </main>
 
