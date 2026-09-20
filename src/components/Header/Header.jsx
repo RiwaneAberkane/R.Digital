@@ -1,237 +1,219 @@
-import { useEffect, useState } from 'react';
 import {
-    ArrowRight,
-    BriefcaseBusiness,
-    House,
-    Mail,
+    useEffect,
+    useState,
+} from 'react';
+
+import {
+    ArrowUpRight,
     Menu,
-    PanelsTopLeft,
-    UserRound,
     X,
 } from 'lucide-react';
 
 import './Header.css';
 
-const navigationItems = [
-    {
-        label: 'Accueil',
-        href: '/#home',
-        icon: House,
-    },
+const navigation = [
     {
         label: 'Projets',
         href: '/#projects',
-        icon: BriefcaseBusiness,
-    },
-    {
-        label: 'Processus',
-        href: '/#process',
-        icon: PanelsTopLeft,
     },
     {
         label: 'À propos',
         href: '/#about',
-        icon: UserRound,
     },
     {
-        label: 'Contact',
-        href: '/#contact',
-        icon: Mail,
+        label: 'Processus',
+        href: '/#process',
+    },
+    {
+        label: 'Technologies',
+        href: '/#stack',
     },
 ];
 
 export default function Header() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isOpen, setIsOpen] =
+        useState(false);
 
     useEffect(() => {
-        if (isMenuOpen) {
-            document.body.classList.add('menu-open');
-        } else {
-            document.body.classList.remove('menu-open');
-        }
+        document.body.style.overflow =
+            isOpen ? 'hidden' : '';
 
-        return () => {
-            document.body.classList.remove('menu-open');
-        };
-    }, [isMenuOpen]);
-
-    useEffect(() => {
-        const handleKeyDown = (event) => {
+        const handleEscape = (event) => {
             if (event.key === 'Escape') {
-                setIsMenuOpen(false);
+                setIsOpen(false);
             }
         };
 
-        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener(
+            'keydown',
+            handleEscape,
+        );
 
         return () => {
-            window.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = '';
+
+            window.removeEventListener(
+                'keydown',
+                handleEscape,
+            );
         };
-    }, []);
+    }, [isOpen]);
 
     const closeMenu = () => {
-        setIsMenuOpen(false);
+        setIsOpen(false);
     };
 
     return (
-        <>
-            <header className="header">
-                <div className="header__container container">
-                    <a
-                        className="header__brand"
-                        href="/#home"
-                        aria-label="R Digital - Accueil"
-                    >
-                        <span className="header__logo-mark">
-                            R
-                        </span>
+        <header className="header">
+            <div className="container header__container">
+                <a
+                    href="/#hero"
+                    className="header__brand"
+                    aria-label="R Digital - Accueil"
+                    onClick={closeMenu}
+                >
+                    <span className="header__logo">
+                        R
+                    </span>
 
-                        <span className="header__logo-text">
-                            R DIGITAL
-                        </span>
-                    </a>
-
-                    <nav
-                        className="header__nav"
-                        aria-label="Navigation principale"
-                    >
-                        {navigationItems.map((item) => (
-                            <a
-                                key={item.label}
-                                className="header__nav-link"
-                                href={item.href}
-                            >
-                                {item.label}
-                            </a>
-                        ))}
-                    </nav>
-
-                    <div className="header__actions">
-                        <a
-                            className="header__contact"
-                            href="mailto:r.digitalcorporation@gmail.com"
-                        >
-                            <span>Discutons</span>
-
-                            <ArrowRight
-                                size={17}
-                                strokeWidth={2}
-                            />
-                        </a>
-
-                        <button
-                            type="button"
-                            className="header__menu-button"
-                            aria-label="Ouvrir le menu"
-                            aria-expanded={isMenuOpen}
-                            aria-controls="mobile-menu"
-                            onClick={() => setIsMenuOpen(true)}
-                        >
-                            <Menu
-                                size={24}
-                                strokeWidth={2}
-                            />
-                        </button>
-                    </div>
-                </div>
-            </header>
-
-            <div
-                id="mobile-menu"
-                className={`mobile-menu ${isMenuOpen
-                        ? 'mobile-menu--open'
-                        : ''
-                    }`}
-                aria-hidden={!isMenuOpen}
-            >
-                <div className="mobile-menu__top">
-                    <a
-                        className="header__brand"
-                        href="/#home"
-                        onClick={closeMenu}
-                    >
-                        <span className="header__logo-mark">
-                            R
-                        </span>
-
-                        <span className="header__logo-text">
-                            R DIGITAL
-                        </span>
-                    </a>
-
-                    <button
-                        type="button"
-                        className="mobile-menu__close"
-                        aria-label="Fermer le menu"
-                        onClick={closeMenu}
-                    >
-                        <X
-                            size={24}
-                            strokeWidth={2}
-                        />
-                    </button>
-                </div>
+                    <span className="header__brand-text">
+                        R DIGITAL
+                    </span>
+                </a>
 
                 <nav
-                    className="mobile-menu__nav"
-                    aria-label="Navigation mobile"
+                    className="header__nav"
+                    aria-label="Navigation principale"
                 >
-                    {navigationItems.map((item) => {
-                        const Icon = item.icon;
-
-                        return (
+                    {navigation.map(
+                        ({
+                            label,
+                            href,
+                        }) => (
                             <a
-                                key={item.label}
-                                href={item.href}
-                                className="mobile-menu__link"
-                                onClick={closeMenu}
+                                key={label}
+                                href={href}
                             >
-                                <span className="mobile-menu__icon">
-                                    <Icon
-                                        size={20}
-                                        strokeWidth={1.8}
-                                    />
-                                </span>
-
-                                <span>
-                                    {item.label}
-                                </span>
+                                {label}
                             </a>
-                        );
-                    })}
+                        ),
+                    )}
                 </nav>
 
                 <a
                     href="mailto:r.digitalcorporation@gmail.com"
-                    className="mobile-menu__cta"
-                    onClick={closeMenu}
+                    className="header__contact"
                 >
-                    <span>Discutons</span>
+                    Discutons
 
-                    <ArrowRight
-                        size={18}
+                    <ArrowUpRight
+                        size={16}
                         strokeWidth={2}
                     />
                 </a>
 
-                <div className="mobile-menu__statement">
-                    <span>
-                        Des idées
+                <button
+                    type="button"
+                    className="header__menu-button"
+                    onClick={() =>
+                        setIsOpen(
+                            (current) =>
+                                !current,
+                        )
+                    }
+                    aria-label={
+                        isOpen
+                            ? 'Fermer le menu'
+                            : 'Ouvrir le menu'
+                    }
+                    aria-expanded={isOpen}
+                >
+                    {isOpen ? (
+                        <X
+                            size={22}
+                            strokeWidth={2}
+                        />
+                    ) : (
+                        <Menu
+                            size={22}
+                            strokeWidth={2}
+                        />
+                    )}
+                </button>
+            </div>
+
+            <div
+                className={[
+                    'header__mobile',
+                    isOpen
+                        ? 'header__mobile--open'
+                        : '',
+                ]
+                    .filter(Boolean)
+                    .join(' ')}
+            >
+                <div className="container header__mobile-inner">
+                    <span className="header__mobile-label">
+                        Navigation
                     </span>
 
-                    <strong>
-                        en réalité.
-                    </strong>
-                </div>
-
-                <div className="mobile-menu__footer">
-                    <a
-                        href="mailto:r.digitalcorporation@gmail.com"
+                    <nav
+                        className="header__mobile-nav"
+                        aria-label="Navigation mobile"
                     >
-                        r.digitalcorporation@gmail.com
-                    </a>
+                        {navigation.map(
+                            (
+                                {
+                                    label,
+                                    href,
+                                },
+                                index,
+                            ) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    onClick={
+                                        closeMenu
+                                    }
+                                >
+                                    <span>
+                                        0
+                                        {index +
+                                            1}
+                                    </span>
+
+                                    {label}
+                                </a>
+                            ),
+                        )}
+
+                        <a
+                            href="/#contact"
+                            onClick={
+                                closeMenu
+                            }
+                        >
+                            <span>
+                                05
+                            </span>
+
+                            Contact
+                        </a>
+                    </nav>
+
+                    <div className="header__mobile-bottom">
+                        <a
+                            href="mailto:r.digitalcorporation@gmail.com"
+                        >
+                            r.digitalcorporation@gmail.com
+                        </a>
+
+                        <span>
+                            R DIGITAL · 2026
+                        </span>
+                    </div>
                 </div>
             </div>
-        </>
+        </header>
     );
 }

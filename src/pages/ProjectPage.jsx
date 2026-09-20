@@ -46,7 +46,8 @@ export default function ProjectPage() {
         }
 
         const ctx = gsap.context(() => {
-            const mm = gsap.matchMedia();
+            const mm =
+                gsap.matchMedia();
 
             mm.add(
                 {
@@ -56,7 +57,8 @@ export default function ProjectPage() {
                 (context) => {
                     const {
                         reduceMotion,
-                    } = context.conditions;
+                    } =
+                        context.conditions;
 
                     if (reduceMotion) {
                         gsap.set(
@@ -69,9 +71,9 @@ export default function ProjectPage() {
                                 '.project-detail__reveal',
                             ],
                             {
-                                clearProps: 'all',
                                 opacity: 1,
-                                transform: 'none',
+                                clearProps:
+                                    'all',
                             },
                         );
 
@@ -81,7 +83,8 @@ export default function ProjectPage() {
                     const timeline =
                         gsap.timeline({
                             defaults: {
-                                ease: 'power3.out',
+                                ease:
+                                    'power3.out',
                             },
                         });
 
@@ -91,43 +94,52 @@ export default function ProjectPage() {
                             {
                                 y: 18,
                                 opacity: 0,
-                                duration: 0.6,
+                                duration:
+                                    0.6,
                             },
                         )
+
                         .from(
                             '.project-detail__title',
                             {
                                 y: 55,
                                 opacity: 0,
-                                duration: 0.9,
+                                duration:
+                                    0.9,
                             },
                             '-=0.25',
                         )
+
                         .from(
                             '.project-detail__lead',
                             {
                                 y: 30,
                                 opacity: 0,
-                                duration: 0.7,
+                                duration:
+                                    0.7,
                             },
                             '-=0.45',
                         )
+
                         .from(
                             '.project-detail__hero-actions',
                             {
                                 y: 20,
                                 opacity: 0,
-                                duration: 0.6,
+                                duration:
+                                    0.6,
                             },
                             '-=0.4',
                         )
+
                         .from(
                             '.project-detail__hero-visual',
                             {
                                 y: 60,
                                 scale: 0.96,
                                 opacity: 0,
-                                duration: 1.1,
+                                duration:
+                                    1.1,
                             },
                             '-=0.6',
                         );
@@ -143,13 +155,22 @@ export default function ProjectPage() {
                                 element,
                                 {
                                     y: 50,
-                                    opacity: 0,
-                                    duration: 0.85,
-                                    ease: 'power3.out',
+                                    opacity:
+                                        0,
 
-                                    scrollTrigger: {
-                                        trigger: element,
-                                        start: 'top 86%',
+                                    duration:
+                                        0.85,
+
+                                    ease:
+                                        'power3.out',
+
+                                    scrollTrigger:
+                                    {
+                                        trigger:
+                                            element,
+
+                                        start:
+                                            'top 86%',
                                     },
                                 },
                             );
@@ -158,10 +179,12 @@ export default function ProjectPage() {
                 },
             );
 
-            return () => mm.revert();
+            return () =>
+                mm.revert();
         }, pageRef);
 
-        return () => ctx.revert();
+        return () =>
+            ctx.revert();
     }, [project]);
 
     if (!project) {
@@ -184,7 +207,8 @@ export default function ProjectPage() {
         <>
             <Helmet>
                 <title>
-                    {project.name} — R Digital
+                    {project.name} —
+                    R Digital
                 </title>
 
                 <meta
@@ -222,17 +246,24 @@ export default function ProjectPage() {
                             </Link>
 
                             <span className="project-detail__counter">
-                                {project.number} / 03
+                                {
+                                    project.number
+                                }{' '}
+                                / 03
                             </span>
                         </div>
 
                         <div className="project-detail__hero-copy">
                             <span className="project-detail__eyebrow">
-                                {project.category}
+                                {
+                                    project.category
+                                }
                             </span>
 
                             <h1 className="project-detail__title">
-                                {project.name}
+                                {
+                                    project.name
+                                }
                             </h1>
 
                             <p className="project-detail__lead">
@@ -251,11 +282,17 @@ export default function ProjectPage() {
                                         rel="noopener noreferrer"
                                         className="project-detail__primary-button"
                                     >
-                                        Voir le site
+                                        Voir
+                                        le
+                                        site
 
                                         <ExternalLink
-                                            size={17}
-                                            strokeWidth={2}
+                                            size={
+                                                17
+                                            }
+                                            strokeWidth={
+                                                2
+                                            }
                                         />
                                     </a>
                                 )}
@@ -264,11 +301,17 @@ export default function ProjectPage() {
                                     href="#project-content"
                                     className="project-detail__secondary-button"
                                 >
-                                    Découvrir le projet
+                                    Découvrir
+                                    le
+                                    projet
 
                                     <ArrowRight
-                                        size={17}
-                                        strokeWidth={2}
+                                        size={
+                                            17
+                                        }
+                                        strokeWidth={
+                                            2
+                                        }
                                     />
                                 </a>
                             </div>
@@ -284,7 +327,9 @@ export default function ProjectPage() {
                                     </div>
 
                                     <span className="project-detail__browser-address">
-                                        {project.slug}
+                                        {
+                                            project.slug
+                                        }
                                     </span>
 
                                     <span className="project-detail__browser-brand">
@@ -324,8 +369,11 @@ export default function ProjectPage() {
                                 </span>
 
                                 <h2>
-                                    Une expérience pensée
-                                    pour son univers.
+                                    Une
+                                    expérience
+                                    pensée
+                                    pour son
+                                    univers.
                                 </h2>
                             </div>
 
@@ -350,7 +398,9 @@ export default function ProjectPage() {
                             </span>
 
                             <p>
-                                {project.role}
+                                {
+                                    project.role
+                                }
                             </p>
                         </div>
                     </div>
@@ -370,14 +420,17 @@ export default function ProjectPage() {
                             </div>
 
                             <h2>
-                                Ce qui structure
+                                Ce qui
+                                structure
                                 l’expérience.
                             </h2>
                         </div>
 
                         <div className="project-detail__features-grid">
                             {project.features.map(
-                                (feature) => (
+                                (
+                                    feature,
+                                ) => (
                                     <article
                                         key={
                                             feature.number
@@ -422,7 +475,8 @@ export default function ProjectPage() {
                             </div>
 
                             <h2>
-                                Le projet en images.
+                                Le projet
+                                en images.
                             </h2>
                         </div>
 
@@ -439,14 +493,20 @@ export default function ProjectPage() {
                                         className={[
                                             'project-detail__gallery-item',
 
-                                            index % 2 !== 0
+                                            index %
+                                                2 !==
+                                                0
                                                 ? 'project-detail__gallery-item--offset'
                                                 : '',
 
                                             'project-detail__reveal',
                                         ]
-                                            .filter(Boolean)
-                                            .join(' ')}
+                                            .filter(
+                                                Boolean,
+                                            )
+                                            .join(
+                                                ' ',
+                                            )}
                                     >
                                         <div className="project-detail__gallery-image">
                                             <img
@@ -494,7 +554,8 @@ export default function ProjectPage() {
                                 </span>
 
                                 <h2>
-                                    Stack technique.
+                                    Stack
+                                    technique.
                                 </h2>
                             </div>
 
@@ -523,17 +584,20 @@ export default function ProjectPage() {
                     <div className="container">
                         <div className="project-detail__cta-box project-detail__reveal">
                             <span>
-                                Un projet en tête ?
+                                Un projet en
+                                tête ?
                             </span>
 
                             <h2>
-                                Créons quelque chose
-                                qui vous ressemble.
+                                Créons quelque
+                                chose qui vous
+                                ressemble.
                             </h2>
 
                             <p>
-                                Une idée, un site ou une
-                                application ? Parlons-en
+                                Une idée, un site
+                                ou une application
+                                ? Parlons-en
                                 simplement.
                             </p>
 
@@ -541,7 +605,8 @@ export default function ProjectPage() {
                                 href="mailto:r.digitalcorporation@gmail.com"
                                 className="project-detail__cta-link"
                             >
-                                Parlons de votre projet
+                                Parlons de
+                                votre projet
 
                                 <ArrowUpRight
                                     size={19}
